@@ -1,0 +1,201 @@
+<template>
+  <div class="home">
+    <div class="container">
+      <StarSky class="starSky" />
+      <AsteroidCrossing />
+      <div class="presentation">
+        <p class="title">Hello</p>
+        <p>My name is Léa</p>
+        <p>I'm a developer and a webdesigner</p>
+      </div>
+      <img class="planet1" src="../../assets/planet1.png" alt="planet1" />
+      <img class="planet2" src="../../assets/planet2.png" alt="planet2" />
+      <img class="planet3" src="../../assets/planet3.png" alt="planet3" />
+      <img class="planet4" src="../../assets/planet4.png" alt="planet4" />
+      <img class="planet5" src="../../assets/planet5.png" alt="planet5" />
+      <img class="planet6" src="../../assets/planet4.png" alt="planet6" />
+    </div>
+  </div>
+</template>
+
+<script>
+import StarSky from "./StarSky";
+import AsteroidCrossing from "./AsteroidCrossing";
+import gsap, { TweenMax } from "gsap";
+
+export default {
+  name: "HomePage",
+  components: {
+    StarSky,
+    AsteroidCrossing,
+  },
+  mounted() {
+    this.asteroidMove();
+    this.planetMove();
+  },
+  methods: {
+    planetMove() {
+      TweenMax.to(".planet1", 65, {
+        rotation: "360",
+        ease: gsap.easeNone,
+        repeat: -1,
+      });
+    },
+    asteroidMove() {
+      TweenMax.to([".asteroide1", ".asteroide3", ".asteroide2"], 10, {
+        rotation: "360",
+        ease: gsap.easeNone,
+        repeat: -1,
+      });
+      gsap.timeline().fromTo(
+        ".asteroide1",
+        {
+          x: gsap.utils.random([1000, 2000, 3000], true),
+          y: gsap.utils.random([1000, 2000, 3000], true),
+          delay: 15,
+          ease: "none",
+        },
+        {
+          x: "random(-100, -1000)",
+          y: "random(-200, -1000)",
+          duration: 8,
+          ease: "none",
+          repeat: -1,
+          delay: 15,
+          repeatRefresh: true,
+        }
+      );
+      gsap.timeline().fromTo(
+        ".asteroide3",
+        {
+          x: gsap.utils.random([-10, -20, -60, -100, -300, -500], true),
+          y: gsap.utils.random([-30, -60, -100, -200, -500], true),
+          ease: "none",
+        },
+        {
+          x: gsap.utils.random([3000, 5000, 4000], true),
+          y: gsap.utils.random([200, 400, 600, 800, 1000], true),
+          duration: 60,
+          ease: "none",
+          repeat: -1,
+          repeatRefresh: true,
+        }
+      );
+      gsap.timeline().fromTo(
+        ".asteroide2",
+        {
+          x: 500,
+          y: 1500,
+        },
+        {
+          x: 900,
+          y: -500,
+          duration: 200,
+          ease: "none",
+          repeat: -1,
+          repeatRefresh: true,
+        }
+      );
+    },
+  },
+};
+</script>
+
+<style  lang="scss" scoped>
+.home {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+
+  .container {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+
+    p {
+      margin: 0;
+      font-size: 30px;
+      z-index: 2;
+      filter: drop-shadow(2px 7px 2px rgba(0, 0, 0, 0.486));
+    }
+
+    .presentation {
+      width: 100%;
+      height: 100%;
+      flex-direction: column;
+      font-family: "Cocogoose";
+      display: flex;
+      text-align: center;
+      justify-content: center;
+      z-index: 2;
+      margin: -4% 0 0 -3%;
+      color: rgb(135, 235, 218);
+
+      .title {
+        font-size: 150px;
+        @media (max-width: 599px) {
+          font-size: 80px;
+        }
+      }
+    }
+
+    .starSky {
+      z-index: 2;
+    }
+
+    @media (max-width: 599px) {
+      img {
+        display: none;
+      }
+    }
+
+    img {
+      position: absolute;
+      filter: drop-shadow(4px 7px 4px rgba(0, 0, 0, 0.486));
+    }
+
+    .planet1 {
+      max-height: 180px;
+      left: 5%;
+      top: 10%;
+    }
+
+    .planet2 {
+      max-height: 300px;
+      right: 15%;
+      bottom: 18%;
+    }
+
+    .planet3 {
+      max-height: 70px;
+      right: 10%;
+      bottom: 10%;
+      filter: blur(0.5px);
+    }
+
+    .planet4 {
+      max-height: 120px;
+      left: 15%;
+      bottom: 9%;
+    }
+
+    .planet5 {
+      max-height: 160px;
+      right: 1%;
+      top: 4%;
+    }
+
+    .planet6 {
+      max-height: 60px;
+      right: 20%;
+      top: 25%;
+      transform: rotate(90deg);
+      filter: opacity(0.7) drop-shadow(0 0 0 green)
+        drop-shadow(3px -1px 2px rgba(0, 0, 0, 0.486)) blur(0.5px);
+    }
+
+  }
+}
+</style>
