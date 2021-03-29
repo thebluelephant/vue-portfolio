@@ -6,7 +6,8 @@
       <div class="presentation">
         <p class="title">Hello</p>
         <p>My name is Léa</p>
-        <p>I'm a developer and a webdesigner</p>
+        <p>I'm a webdeveloper and a webdesigner</p>
+        <p>Welcome in my universe ! </p>
       </div>
       <img class="planet1" src="../../assets/planet1.png" alt="planet1" />
       <img class="planet2" src="../../assets/planet2.png" alt="planet2" />
@@ -19,7 +20,7 @@
 </template>
 
 <script>
-import StarSky from "./StarSky";
+import StarSky from "../Common/StarSky";
 import AsteroidCrossing from "./AsteroidCrossing";
 import gsap, { TweenMax } from "gsap";
 

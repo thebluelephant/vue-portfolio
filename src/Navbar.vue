@@ -2,13 +2,13 @@
   <div class="navbar">
     <li>
       <ul>
-        <p>What</p>
+        <p><a href="/about">About</a></p>
       </ul>
       <ul>
-        <p>About</p>
+        <p><a href="/home">Home</a></p>
       </ul>
       <ul>
-        <p>Where</p>
+        <p><a href="/what">What</a></p>
       </ul>
     </li>
   </div>
@@ -38,6 +38,11 @@ ul {
   background-size: 100% 0.2em;
   background-position: 0 88%;
   transition: background-size 0.2s ease-in;
+
+  a {
+    text-decoration: none;
+    color: unset;
+  }
 
   p {
     margin: 0;

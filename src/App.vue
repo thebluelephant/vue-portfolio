@@ -1,18 +1,16 @@
 <template>
   <div id="app">
     <Navbar class="navbar" />
-    <HomePage class="homepage" />
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import HomePage from "./components/Homepage/Homepage";
 import Navbar from "./Navbar";
 
 export default {
   name: "App",
   components: {
-    HomePage,
     Navbar,
   },
 };
@@ -20,7 +18,7 @@ export default {
 
 <style>
 #app {
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
   top: 0;
@@ -31,6 +29,7 @@ export default {
   background-image: url("./assets/noise.png");
   background-repeat: repeat;
   background-color: #242f65;
+  font-family: "Cocogoose";
 }
 
 .navbar {
