@@ -8,6 +8,10 @@
         I'm a french developer and webdesigner based in Lyon <br />
         Beside my work, I love writing, sewing, and lost my socks during laundry
       </p>
+      <p>
+        Initialement graphiste, j'ai évolué dans le monde du digital en poussant
+        encore d'avantage ma pratique vers le développement web
+      </p>
     </div>
   </div>
 </template>

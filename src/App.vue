@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <Navbar class="navbar" />
-    <router-view></router-view>
+    <div class="body">
+      <router-view></router-view>
+    </div>
+    
   </div>
 </template>
 
@@ -37,7 +40,7 @@ export default {
   grid-row: 1;
   z-index: 2;
 }
-.homepage {
+.body {
   grid-column: 2;
   grid-row: 2;
 }
