@@ -1,10 +1,12 @@
 <template>
   <div id="app">
+    <img src="./assets/bckg-layer2.png" alt="" class="bckg-layer2" />
+    <img src="./assets/bckg-layer3.png" alt="" class="bckg-layer3" />
+    <img src="./assets/bckg-layer4.png" alt="" class="bckg-layer4" />
     <Navbar class="navbar" />
     <div class="body">
       <router-view></router-view>
     </div>
-    
   </div>
 </template>
 
@@ -35,10 +37,24 @@ export default {
   font-family: "Cocogoose";
 }
 
+.bckg-layer2,
+.bckg-layer3,
+.bckg-layer4 {
+  position: absolute;
+  resize: both;
+  width: 100%;
+  height: 100%;
+}
+
+.bckg-layer3,
+.bckg-layer4 {
+  z-index: 3;
+}
+
 .navbar {
   grid-column: 1/3;
   grid-row: 1;
-  z-index: 2;
+  z-index: 4;
 }
 .body {
   grid-column: 2;

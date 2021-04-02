@@ -7,7 +7,7 @@
         <p class="title">Hello</p>
         <p>My name is Léa</p>
         <p>I'm a webdeveloper and a webdesigner</p>
-        <p>Welcome in my universe ! </p>
+        <p>Welcome in my universe !</p>
       </div>
       <img class="planet1" src="../../assets/planet1.png" alt="planet1" />
       <img class="planet2" src="../../assets/planet2.png" alt="planet2" />
@@ -177,14 +177,14 @@ export default {
     }
 
     .planet4 {
-      max-height: 120px;
+      max-height: 90px;
       left: 15%;
-      bottom: 9%;
+      bottom: 25%;
     }
 
     .planet5 {
       max-height: 160px;
-      right: 1%;
+      right: 12%;
       top: 4%;
     }
 
@@ -196,7 +196,6 @@ export default {
       filter: opacity(0.7) drop-shadow(0 0 0 green)
         drop-shadow(3px -1px 2px rgba(0, 0, 0, 0.486)) blur(0.5px);
     }
-
   }
 }
 </style>
