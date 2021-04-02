@@ -1,9 +1,9 @@
 <template>
   <div class="myWork" v-if="skills">
     <div v-for="skill in skills" :key="skill.name" class="skillLogo">
-      <img :src="skill.imageSrc" />
+      <img :src="skill.imageSrc" :id="skill.name" />
     </div>
-    <img src="../../assets/githublogo.png" alt="logo Github" />
+    <img src="../../assets/githublogo.png" alt="logo Github"/>
   </div>
 </template>
 
@@ -49,11 +49,11 @@ export default {
   },
   methods: {
     makeLogoFloat() {
-       gsap.timeline().from(".skillLogo", {
-        x: `random(1, 3)`,
-        y: `random(1, 3)`,
-        duration: 180,
-        ease: "Power1.easeOut",
+      gsap.timeline().to(".skillLogo", {
+        x: "random(-3, 3)", 
+        y: "random(-3, 3)",
+        duration: 3,
+        ease: "sine.inOut",
         repeat: -1,
         repeatRefresh: true,
       });
@@ -72,6 +72,11 @@ export default {
 
   img {
     max-height: 100px;
+    cursor: pointer;
+  }
+  
+  #VueJS{
+    max-height: 65px;
   }
 
   p {
