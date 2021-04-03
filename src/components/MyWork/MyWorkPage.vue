@@ -1,11 +1,23 @@
+
 <template>
   <div class="myWork" v-if="skills">
     <img src="../../assets/planete.png" alt="" class="planete" />
 
     <div class="skills">
-      <div v-for="skill in skills" :key="skill.name" class="skillLogo" @mouseover="animateRating(skill.name)">
-        <img :src="skill.imageSrc" :id="skill.name" />
-        <StarRating class="rating" :rate="skill.skillRate" :id="`rating-${skill.name}`"/>
+      <div
+        v-for="skill in skills"
+        :key="skill.name"
+        :id="`img-${skill.name}`"
+        class="skillLogo"
+        @mouseover.native="onMouseHover"
+        @mouseleave.native="onMouseLeave"
+      >
+        <img :src="skill.imageSrc" :id="`img-${skill.name}`" />
+        <StarRating
+          class="rating"
+          :rate="skill.skillRate"
+          :id="`rating-${skill.name}`"
+        />
         <div class="shaddow"></div>
       </div>
     </div>
@@ -17,6 +29,7 @@
 import gsap from "gsap";
 import StarSky from "../Common/StarSky";
 import StarRating from "../Common/StarRating";
+import { bus } from "../../main";
 
 export default {
   name: "MyWorkPage",
@@ -74,16 +87,12 @@ export default {
         repeatRefresh: true,
       });
     },
-    animateRating(id) {
-      console.log('hello', `#rating-${id}`);
-      gsap.timeline().to(`#rating-${id}`, {
-        x: "0",
-        y: "-25",
-        duration: 1,
-        ease: "sine.inOut",
-        repeat: -1,
-        repeatRefresh: true,
-      });
+
+    onMouseHover() {
+      bus.$emit("skillHovered");
+    },
+    onMouseLeave() {
+      bus.$emit("skillLeaved");
     },
   },
 };
@@ -132,7 +141,7 @@ export default {
       max-height: 65px;
     }
 
-    .rating{
+    .rating {
       position: absolute;
       top: 30px;
       z-index: 1;

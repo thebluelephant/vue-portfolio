@@ -17,6 +17,7 @@
 
 <script>
 import gsap from "gsap";
+import { bus } from "../../main"
 
 export default {
   name: "starRating",
@@ -26,19 +27,43 @@ export default {
       maxRate: 5,
     };
   },
-  mounted() {},
+  mounted() {
+    bus.$on('skillHovered', this.bouncingApparition);
+    bus.$on('skillLeaved', this.disparition);
+  },
   methods: {
     bouncingApparition() {
-      for (let i = 0; i < this.maxRate; i++) {
-        gsap.timeline().from(`#rate-${i}`, {
+      console.log("apparition");
+      for (let i = 1; i <= this.maxRate; i++) {
+        gsap.timeline().fromTo(
+          `#rate-${i}`,
+          { opacity: 0 },
+          {
+            opacity: 1,
+            duration: 1,
+            ease: "sine.inOut",
+            delay: i * 0.5,
+          }
+        );
+
+        gsap.timeline().to(`#rate-${i}`, {
           x: "0",
           y: "-25",
           duration: 1,
           ease: "sine.inOut",
-          repeat: -1,
-          repeatRefresh: true,
+          yoyo: true,
+          delay: i * 0.5,
+          repeat: 1,
         });
       }
+    },
+    disparition() {
+      console.log("disparition");
+      gsap.timeline().to(`.rate`, {
+        opacity: 0,
+        duration: 1,
+        y: 0,
+      });
     },
   },
 };
@@ -55,6 +80,7 @@ export default {
   max-width: 10px;
   fill: rgb(218, 218, 218);
   margin-right: 3px;
+  opacity: 0;
 
   &--selected {
     fill: rgb(255, 230, 0);
