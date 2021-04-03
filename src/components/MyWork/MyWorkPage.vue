@@ -1,45 +1,61 @@
 <template>
   <div class="myWork" v-if="skills">
-    <div v-for="skill in skills" :key="skill.name" class="skillLogo">
-      <img :src="skill.imageSrc" :id="skill.name" />
+    <img src="../../assets/planete.png" alt="" class="planete" />
+
+    <div class="skills">
+      <div v-for="skill in skills" :key="skill.name" class="skillLogo" @mouseover="animateRating(skill.name)">
+        <img :src="skill.imageSrc" :id="skill.name" />
+        <StarRating class="rating" :rate="skill.skillRate" :id="`rating-${skill.name}`"/>
+        <div class="shaddow"></div>
+      </div>
     </div>
-    <img src="../../assets/githublogo.png" alt="logo Github"/>
+    <StarSky class="starSky" />
   </div>
 </template>
 
 <script>
 import gsap from "gsap";
+import StarSky from "../Common/StarSky";
+import StarRating from "../Common/StarRating";
 
 export default {
   name: "MyWorkPage",
-  components: {},
+  components: {
+    StarSky,
+    StarRating,
+  },
   data() {
     return {
       skills: [
         {
           name: "Angular",
           imageSrc: require("../../assets/logoangular.png"),
-          skillRate: "6",
+          skillRate: "4",
         },
         {
           name: "React",
           imageSrc: require("../../assets/reactIcon.png"),
-          skillRate: "6",
+          skillRate: "4",
         },
         {
           name: "VueJS",
           imageSrc: require("../../assets/logovue.png"),
-          skillRate: "4",
+          skillRate: "3",
+        },
+        {
+          name: "Github",
+          imageSrc: require("../../assets/githublogo.png"),
+          skillRate: "3",
         },
         {
           name: "Photoshop",
           imageSrc: require("../../assets/logophotoshop.png"),
-          skillRate: "7",
+          skillRate: "4",
         },
         {
           name: "Indesign",
           imageSrc: require("../../assets/indesignLogo.png"),
-          skillRate: "5",
+          skillRate: "3",
         },
       ],
     };
@@ -50,9 +66,20 @@ export default {
   methods: {
     makeLogoFloat() {
       gsap.timeline().to(".skillLogo", {
-        x: "random(-3, 3)", 
+        x: "random(-3, 3)",
         y: "random(-3, 3)",
         duration: 3,
+        ease: "sine.inOut",
+        repeat: -1,
+        repeatRefresh: true,
+      });
+    },
+    animateRating(id) {
+      console.log('hello', `#rating-${id}`);
+      gsap.timeline().to(`#rating-${id}`, {
+        x: "0",
+        y: "-25",
+        duration: 1,
         ease: "sine.inOut",
         repeat: -1,
         repeatRefresh: true,
@@ -70,13 +97,46 @@ export default {
   justify-content: center;
   align-items: center;
 
-  img {
-    max-height: 100px;
-    cursor: pointer;
+  .starSky {
+    z-index: 1;
+    opacity: 0.4;
   }
-  
-  #VueJS{
-    max-height: 65px;
+  .planete {
+    position: absolute;
+    max-width: 100%;
+    bottom: -120px;
+    z-index: 2;
+  }
+
+  .skills {
+    display: flex;
+    z-index: 2;
+
+    img {
+      max-height: 100px;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .shaddow {
+      position: absolute;
+      width: 90%;
+      height: 15%;
+      border-radius: 30px;
+      box-shadow: 0px 96px 18px rgba(0, 0, 0, 0.233);
+    }
+
+    #VueJS,
+    #Photoshop,
+    #Indesign {
+      max-height: 65px;
+    }
+
+    .rating{
+      position: absolute;
+      top: 30px;
+      z-index: 1;
+    }
   }
 
   p {
