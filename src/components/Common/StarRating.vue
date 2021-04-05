@@ -2,9 +2,9 @@
   <div class="starRating">
     <svg
       v-for="(element, index) in maxRate"
-      :key="element"
-      :class="rate >= index + 1 ? 'rate rate--selected' : 'rate'"
-      :id="`rate-${index + 1}`"
+      :key="element + index"
+      :class="skill.skillRate >= index + 1 ? 'rate rate--selected' : 'rate'"
+      :id="`${skill.name}-rate-${index + 1}`"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 512.002 512.002"
     >
@@ -17,36 +17,41 @@
 
 <script>
 import gsap from "gsap";
-import { bus } from "../../main"
 
 export default {
   name: "starRating",
-  props: ["rate"],
+  props: ["skill", "elementIsHovered"],
   data() {
     return {
       maxRate: 5,
     };
   },
   mounted() {
-    bus.$on('skillHovered', this.bouncingApparition);
-    bus.$on('skillLeaved', this.disparition);
+    console.log(this.skill);
   },
+  watch: {
+    elementIsHovered() {
+      this.elementIsHovered
+        ? this.bouncingApparition(this.skill.name)
+        : this.disparition();
+    },
+  },
+
   methods: {
-    bouncingApparition() {
-      console.log("apparition");
+    bouncingApparition(elementName) {
       for (let i = 1; i <= this.maxRate; i++) {
         gsap.timeline().fromTo(
-          `#rate-${i}`,
+          `#${elementName}-rate-${i}`,
           { opacity: 0 },
           {
             opacity: 1,
-            duration: 1,
+            duration: 0.5,
             ease: "sine.inOut",
             delay: i * 0.5,
           }
         );
 
-        gsap.timeline().to(`#rate-${i}`, {
+        gsap.timeline().to(`#${elementName}-rate-${i}`, {
           x: "0",
           y: "-25",
           duration: 1,
@@ -58,7 +63,6 @@ export default {
       }
     },
     disparition() {
-      console.log("disparition");
       gsap.timeline().to(`.rate`, {
         opacity: 0,
         duration: 1,

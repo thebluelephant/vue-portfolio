@@ -5,17 +5,18 @@
 
     <div class="skills">
       <div
-        v-for="skill in skills"
-        :key="skill.name"
+        v-for="(skill, index) in skills"
+        :key="skill + index"
         :id="`img-${skill.name}`"
         class="skillLogo"
-        @mouseover.native="onMouseHover"
-        @mouseleave.native="onMouseLeave"
+        @mouseenter="skill.elementIsHovered = true"
+        @mouseleave="skill.elementIsHovered = false"
       >
         <img :src="skill.imageSrc" :id="`img-${skill.name}`" />
         <StarRating
           class="rating"
-          :rate="skill.skillRate"
+          :skill="skill"
+          :elementIsHovered="skill.elementIsHovered"
           :id="`rating-${skill.name}`"
         />
         <div class="shaddow"></div>
@@ -29,7 +30,6 @@
 import gsap from "gsap";
 import StarSky from "../Common/StarSky";
 import StarRating from "../Common/StarRating";
-import { bus } from "../../main";
 
 export default {
   name: "MyWorkPage",
@@ -44,31 +44,37 @@ export default {
           name: "Angular",
           imageSrc: require("../../assets/logoangular.png"),
           skillRate: "4",
+          elementIsHovered: false,
         },
         {
           name: "React",
           imageSrc: require("../../assets/reactIcon.png"),
           skillRate: "4",
+          elementIsHovered: false,
         },
         {
           name: "VueJS",
           imageSrc: require("../../assets/logovue.png"),
           skillRate: "3",
+          elementIsHovered: false,
         },
         {
           name: "Github",
           imageSrc: require("../../assets/githublogo.png"),
           skillRate: "3",
+          elementIsHovered: false,
         },
         {
           name: "Photoshop",
           imageSrc: require("../../assets/logophotoshop.png"),
           skillRate: "4",
+          elementIsHovered: false,
         },
         {
           name: "Indesign",
           imageSrc: require("../../assets/indesignLogo.png"),
           skillRate: "3",
+          elementIsHovered: false,
         },
       ],
     };
@@ -86,13 +92,6 @@ export default {
         repeat: -1,
         repeatRefresh: true,
       });
-    },
-
-    onMouseHover() {
-      bus.$emit("skillHovered");
-    },
-    onMouseLeave() {
-      bus.$emit("skillLeaved");
     },
   },
 };
