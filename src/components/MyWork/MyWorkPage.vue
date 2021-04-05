@@ -8,17 +8,20 @@
         v-for="(skill, index) in skills"
         :key="skill + index"
         :id="`img-${skill.name}`"
-        class="skillLogo"
-        @mouseenter="skill.elementIsHovered = true"
-        @mouseleave="skill.elementIsHovered = false"
+        class="skill"
+        @mouseenter="skill.skillHovered = true"
+        @mouseleave="skill.skillHovered = false"
       >
-        <img :src="skill.imageSrc" :id="`img-${skill.name}`" />
-        <StarRating
-          class="rating"
-          :skill="skill"
-          :elementIsHovered="skill.elementIsHovered"
-          :id="`rating-${skill.name}`"
-        />
+        <div class="skills skills__images">
+          <SkillsRating
+            class="rating"
+            :skill="skill"
+            :skillHovered="skill.skillHovered"
+            :id="`rating-${skill.name}`"
+          />
+          <img :src="skill.imageSrc" :id="`img-${skill.name}`" />
+        </div>
+
         <div class="shaddow"></div>
       </div>
     </div>
@@ -29,52 +32,70 @@
 <script>
 import gsap from "gsap";
 import StarSky from "../Common/StarSky";
-import StarRating from "../Common/StarRating";
+import SkillsRating from "../Common/SkillsRating";
 
 export default {
   name: "MyWorkPage",
   components: {
     StarSky,
-    StarRating,
+    SkillsRating,
   },
   data() {
     return {
       skills: [
         {
           name: "Angular",
-          imageSrc: require("../../assets/logoangular.png"),
+          imageSrc: require("../../assets/skills-logo/angular.png"),
           skillRate: "4",
-          elementIsHovered: false,
+          skillHovered: false,
         },
         {
           name: "React",
-          imageSrc: require("../../assets/reactIcon.png"),
+          imageSrc: require("../../assets/skills-logo/reactJs.png"),
           skillRate: "4",
-          elementIsHovered: false,
+          skillHovered: false,
         },
         {
           name: "VueJS",
-          imageSrc: require("../../assets/logovue.png"),
+          imageSrc: require("../../assets/skills-logo/vueJs.png"),
           skillRate: "3",
-          elementIsHovered: false,
+          skillHovered: false,
         },
         {
           name: "Github",
-          imageSrc: require("../../assets/githublogo.png"),
+          imageSrc: require("../../assets/skills-logo/gitHub.png"),
           skillRate: "3",
-          elementIsHovered: false,
+          skillHovered: false,
+        },
+        {
+          name: "NodeJS",
+          imageSrc: require("../../assets/skills-logo/nodeJS.png"),
+          skillRate: "3",
+          skillHovered: false,
+        },
+        {
+          name: "MongoDB",
+          imageSrc: require("../../assets/skills-logo/mongoDb.png"),
+          skillRate: "2",
+          skillHovered: false,
+        },
+        {
+          name: "MySQL",
+          imageSrc: require("../../assets/skills-logo/mySql.png"),
+          skillRate: "1",
+          skillHovered: false,
         },
         {
           name: "Photoshop",
-          imageSrc: require("../../assets/logophotoshop.png"),
+          imageSrc: require("../../assets/skills-logo/photoShop.png"),
           skillRate: "4",
-          elementIsHovered: false,
+          skillHovered: false,
         },
         {
           name: "Indesign",
-          imageSrc: require("../../assets/indesignLogo.png"),
+          imageSrc: require("../../assets/skills-logo/inDesign.png"),
           skillRate: "3",
-          elementIsHovered: false,
+          skillHovered: false,
         },
       ],
     };
@@ -84,7 +105,7 @@ export default {
   },
   methods: {
     makeLogoFloat() {
-      gsap.timeline().to(".skillLogo", {
+      gsap.timeline().to(".skill", {
         x: "random(-3, 3)",
         y: "random(-3, 3)",
         duration: 3,
@@ -120,10 +141,17 @@ export default {
     display: flex;
     z-index: 2;
 
+    .skill {
+      margin-right: 25px;
+    }
     img {
-      max-height: 100px;
+      max-height: 70px;
       cursor: pointer;
       z-index: 2;
+    }
+    &__images {
+      display: flex;
+      justify-content: center;
     }
 
     .shaddow {
@@ -142,7 +170,7 @@ export default {
 
     .rating {
       position: absolute;
-      top: 30px;
+      top: -35px;
       z-index: 1;
     }
   }
