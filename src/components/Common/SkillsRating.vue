@@ -27,6 +27,7 @@ export default {
   data() {
     return {
       maxRate: 5,
+      isAnimate: false,
     };
   },
   watch: {
@@ -45,19 +46,19 @@ export default {
           { opacity: 0 },
           {
             opacity: 1,
-            duration: 0.5,
+            duration: 0.3,
             ease: "sine.inOut",
-            delay: i * 0.5,
+            delay: i * 0.2,
           }
         );
 
         gsap.timeline().to(`#${skillName}-rate-${i}`, {
           x: "0",
           y: "-10",
-          duration: 0.6,
+          duration: 0.4,
           ease: "sine.inOut",
           yoyo: true,
-          delay: i * 0.3,
+          delay: i * 0.1,
           repeat: 1,
         });
       }
@@ -83,6 +84,7 @@ export default {
   height: 50px;
 
   p {
+    color: white;
     font-size: 70%;
     margin: 0 0 5px 0;
   }

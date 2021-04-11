@@ -1,23 +1,30 @@
 
 <template>
   <div class="myWork" v-if="skills">
-    <img src="../../assets/planete.png" alt="" class="planete" />
-    <svg width="1000" height="800" viewport="0 0 1000 800">
-      <polygon id="front-line" fill="none" stroke="#dddddd" points="" />
-      <polygon id="back-line" fill="none" stroke="#dddddd" points="" />
-      <polygon id="design-line" fill="none" stroke="#dddddd" points="" />
-      <polygon id="dev-line" fill="none" stroke="#dddddd" points="" />
-    </svg>
-    <div class="skills">
+    <StarSky class="starSky" />
+    <div
+      v-for="(sortedSkills, index) in skills"
+      :key="index"
+      :class="`sortedSkills sortedSkills--${index}`"
+    >
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+        <polygon
+          :id="`line-skill__${index}`"
+          fill="none"
+          stroke="#dddddd"
+          points=""
+        />
+      </svg>
+
       <div
-        v-for="skill in skills"
+        v-for="skill in sortedSkills"
         :key="skill.name"
         :id="`img-${skill.name}`"
-        :class="`skill skill--${skill.category}`"
+        :class="`skill skill__${skill.category}`"
         @mouseenter="skill.skillHovered = true"
         @mouseleave="skill.skillHovered = false"
       >
-        <div class="skills skills__images">
+        <div class="images">
           <SkillsRating
             class="rating"
             :skill="skill"
@@ -26,11 +33,8 @@
           />
           <img :src="skill.imageSrc" :id="`img-${skill.name}`" />
         </div>
-
-        <div class="shaddow"></div>
       </div>
     </div>
-    <StarSky class="starSky" />
   </div>
 </template>
 
@@ -38,6 +42,7 @@
 import gsap, { TweenMax } from "gsap";
 import StarSky from "../Common/StarSky";
 import SkillsRating from "../Common/SkillsRating";
+import $ from "jquery";
 
 export default {
   name: "MyWorkPage",
@@ -47,110 +52,114 @@ export default {
   },
   data() {
     return {
-      skills: [
-        {
-          name: "Angular",
-          imageSrc: require("../../assets/skills-logo/angular.png"),
-          skillRate: "4",
-          skillHovered: false,
-          category: "front",
-        },
-        {
-          name: "React",
-          imageSrc: require("../../assets/skills-logo/reactJs.png"),
-          skillRate: "4",
-          skillHovered: false,
-          category: "front",
-        },
-        {
-          name: "VueJS",
-          imageSrc: require("../../assets/skills-logo/vueJs.png"),
-          skillRate: "3",
-          skillHovered: false,
-          category: "front",
-        },
-        {
-          name: "Github",
-          imageSrc: require("../../assets/skills-logo/gitHub.png"),
-          skillRate: "3",
-          skillHovered: false,
-          category: "dev",
-        },
-        {
-          name: "NodeJS",
-          imageSrc: require("../../assets/skills-logo/nodeJS.png"),
-          skillRate: "3",
-          skillHovered: false,
-          category: "back",
-        },
-        {
-          name: "MongoDB",
-          imageSrc: require("../../assets/skills-logo/mongoDb.png"),
-          skillRate: "2",
-          skillHovered: false,
-          category: "back",
-        },
-        {
-          name: "MySQL",
-          imageSrc: require("../../assets/skills-logo/mySql.png"),
-          skillRate: "1",
-          skillHovered: false,
-          category: "back",
-        },
-        {
-          name: "Photoshop",
-          imageSrc: require("../../assets/skills-logo/photoShop.png"),
-          skillRate: "4",
-          skillHovered: false,
-          category: "design",
-        },
-        {
-          name: "Indesign",
-          imageSrc: require("../../assets/skills-logo/inDesign.png"),
-          skillRate: "3",
-          skillHovered: false,
-          category: "design",
-        },
-      ],
+      skills: {
+        front: [
+          {
+            name: "Angular",
+            imageSrc: require("../../assets/skills-logo/angular.png"),
+            skillRate: "4",
+            skillHovered: false,
+            category: "front",
+          },
+          {
+            name: "React",
+            imageSrc: require("../../assets/skills-logo/reactJs.png"),
+            skillRate: "4",
+            skillHovered: false,
+            category: "front",
+          },
+          {
+            name: "VueJS",
+            imageSrc: require("../../assets/skills-logo/vueJs.png"),
+            skillRate: "3",
+            skillHovered: false,
+            category: "front",
+          },
+        ],
+        back: [
+          {
+            name: "NodeJS",
+            imageSrc: require("../../assets/skills-logo/nodeJS.png"),
+            skillRate: "3",
+            skillHovered: false,
+            category: "back",
+          },
+          {
+            name: "MongoDB",
+            imageSrc: require("../../assets/skills-logo/mongoDb.png"),
+            skillRate: "2",
+            skillHovered: false,
+            category: "back",
+          },
+          {
+            name: "MySQL",
+            imageSrc: require("../../assets/skills-logo/mySql.png"),
+            skillRate: "1",
+            skillHovered: false,
+            category: "back",
+          },
+        ],
+        random: [
+          {
+            name: "Photoshop",
+            imageSrc: require("../../assets/skills-logo/photoShop.png"),
+            skillRate: "4",
+            skillHovered: false,
+            category: "random",
+          },
+          {
+            name: "Indesign",
+            imageSrc: require("../../assets/skills-logo/inDesign.png"),
+            skillRate: "3",
+            skillHovered: false,
+            category: "random",
+          },
+          {
+            name: "Github",
+            imageSrc: require("../../assets/skills-logo/gitHub.png"),
+            skillRate: "3",
+            skillHovered: false,
+            category: "random",
+          },
+        ],
+      },
+
       frontSkills: null,
       backSkills: null,
-      devSkills: null,
-      designSkills: null,
-      line: "",
+      randomSkills: null,
     };
   },
   mounted() {
     this.makeLogoFloat();
-    this.frontSkills = document.querySelectorAll(".skill--front");
-    this.backSkills = document.querySelectorAll(".skill--back");
-    this.devSkills = document.querySelectorAll(".skill--dev");
-    this.designSkills = document.querySelectorAll(".skill--design");
+    this.frontSkills = document.getElementsByClassName("skill__front");
+    this.backSkills = document.getElementsByClassName("skill__back");
+    this.randomSkills = document.getElementsByClassName("skill__random");
     this.drawConstellation();
   },
+
   methods: {
     drawConstellation() {
-      const skills = [
-        this.frontSkills,
-        this.backSkills,
-        this.devSkills,
-        this.designSkills,
-      ];
-      this.line = "";
-      skills.forEach((typesSkill) => { // faire 1 constellation par type de logo
+      const skills = [this.frontSkills, this.backSkills, this.randomSkills];
+
+      skills.forEach((typesSkill) => {
+        let line = "";
         for (let i = 0; i < typesSkill.length; i++) {
-          let a = Number(typesSkill[i].getBoundingClientRect().left) + 3;
-          let b = Number(typesSkill[i].getBoundingClientRect().top) + 3;
-          this.line += a + "," + b + " ";
+          let a = $(typesSkill[i]).position().left + 3;
+          let b = $(typesSkill[i]).position().top + 3;
+          line += a + "," + b + " ";
         }
-        TweenMax.set(`#${skill.lineId}`, { attr: { points: this.line } });
+
+        TweenMax.set(`#line-${typesSkill[0].classList[1]}`, {
+          attr: { points: line },
+        });
       });
     },
+
     makeLogoFloat() {
       gsap.timeline().to(".skill", {
-        x: "random(-30, 30)",
-        y: "random(-30, 30)",
-        duration: 3,
-        ease: "sine.inOut",
+        x: "random(-50, 50)",
+        y: "random(-50, 50)",
+        duration: 10,
         repeat: -1,
         repeatRefresh: true,
         onUpdate: this.drawConstellation,
@@ -162,62 +171,104 @@ export default {
 
 <style  lang="scss" scoped>
 .myWork {
-  display: flex;
-  width: 100%;
   height: 100%;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
 
-  svg {
-    position: absolute;
-  }
   .starSky {
     z-index: 1;
     opacity: 0.4;
   }
-  .planete {
-    position: absolute;
-    max-width: 100%;
-    bottom: -120px;
-    z-index: 2;
-  }
 
-  .skills {
-    display: flex;
+  .sortedSkills {
+    width: 400px;
+    height: 400px;
+    position: absolute;
     z-index: 2;
+
+    &--front {
+      left: 5%;
+      top: 20%;
+
+      #img-Angular {
+        right: 50px;
+        bottom: 80px;
+      }
+      #img-React {
+        left: 40px;
+        bottom: 25px;
+      }
+      #img-VueJS {
+        left: 120px;
+        top: 30px;
+      }
+    }
+
+    &--back {
+      right: 5%;
+      top: 20%;
+
+      #img-NodeJS {
+        right: 50px;
+        top: 50px;
+      }
+      #img-MongoDB {
+        left: 70px;
+        bottom: 30px;
+      }
+      #img-MySQL {
+        left: 90px;
+        top: 90px;
+      }
+    }
+
+    &--random {
+      right: 35%;
+      bottom: 0;
+
+      #img-Indesign {
+        left: 50px;
+        bottom: 100px;
+      }
+      #img-Photoshop {
+        top: 30px;
+        right: 35px;
+      }
+      #img-Github {
+        bottom: 80px;
+        right: 90px;
+      }
+    }
 
     .skill {
-      margin-right: 25px;
-      top: random($limit: 10);
-    }
-    img {
-      max-height: 70px;
-      cursor: pointer;
-      z-index: 2;
-    }
-    &__images {
-      display: flex;
-      justify-content: center;
-    }
-
-    .shaddow {
       position: absolute;
-      width: 90%;
-      height: 15%;
-      border-radius: 30px;
-      box-shadow: 0px 96px 18px rgba(0, 0, 0, 0.233);
-    }
+      height: 80px;
+      width: 80px;
 
-    #VueJS,
-    #Photoshop,
-    #Indesign {
-      max-height: 65px;
-    }
+      .images {
+        display: flex;
+        justify-content: center;
+        height: 60px;
+        width: 60px;
 
-    .rating {
-      position: absolute;
-      top: -35px;
-      z-index: 1;
+        .rating {
+          position: absolute;
+          top: -35px;
+          z-index: 1;
+        }
+
+        img {
+          max-height: 60px;
+          max-width: 60px;
+          cursor: pointer;
+          z-index: 2;
+        }
+
+        #VueJS,
+        #Photoshop,
+        #Indesign {
+          max-height: 65px;
+        }
+      }
     }
   }
 

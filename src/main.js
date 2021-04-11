@@ -3,7 +3,8 @@ import App from './App';
 import AboutPage from './components/About/AboutPage';
 import HomePage from './components/Homepage/Homepage';
 import MyWorkPage from './components/MyWork/MyWorkPage';
-import VueRouter from 'vue-router'
+import VueRouter from 'vue-router';
+
 
 Vue.use(VueRouter)
 Vue.config.productionTip = false
