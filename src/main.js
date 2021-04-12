@@ -2,10 +2,13 @@ import Vue from 'vue';
 import App from './App';
 import AboutPage from './components/About/AboutPage';
 import HomePage from './components/Homepage/Homepage';
-import VueRouter from 'vue-router'
+import MyWorkPage from './components/MyWork/MyWorkPage';
+import VueRouter from 'vue-router';
+
 
 Vue.use(VueRouter)
 Vue.config.productionTip = false
+export const bus = new Vue();
 
 const routes = [
   { path: '*', redirect: '/home' },
@@ -17,6 +20,10 @@ const routes = [
       {
         path: 'about',
         component: AboutPage
+      },
+      {
+        path: 'mywork',
+        component: MyWorkPage
       },
       {
         path: 'home',

@@ -1,7 +1,10 @@
 <template>
   <div id="app">
+
     <Navbar class="navbar" />
-    <router-view></router-view>
+    <div class="body">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -35,9 +38,9 @@ export default {
 .navbar {
   grid-column: 1/3;
   grid-row: 1;
-  z-index: 2;
+  z-index: 4;
 }
-.homepage {
+.body {
   grid-column: 2;
   grid-row: 2;
 }
@@ -45,5 +48,10 @@ export default {
   font-family: "Cocogoose";
   src: local("Cocogoose"),
     url("./assets/font/cocogoose/Cocogoose Pro-trial.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Cocogoose-light";
+  src: local("Cocogoose-light"),
+    url("./assets/font/cocogoose/Cocogoose Pro Light-trial.ttf") format("truetype");
 }
 </style>

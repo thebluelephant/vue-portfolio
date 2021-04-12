@@ -1,5 +1,8 @@
 <template>
   <div class="home">
+    <img src="../../assets/bckg-layer2.png" alt="" class="bckg-layer2" />
+    <img src="../../assets/bckg-layer3.png" alt="" class="bckg-layer3" />
+    <img src="../../assets/bckg-layer4.png" alt="" class="bckg-layer4" />
     <div class="container">
       <StarSky class="starSky" />
       <AsteroidCrossing />
@@ -7,7 +10,7 @@
         <p class="title">Hello</p>
         <p>My name is Léa</p>
         <p>I'm a webdeveloper and a webdesigner</p>
-        <p>Welcome in my universe ! </p>
+        <p>Welcome in my universe !</p>
       </div>
       <img class="planet1" src="../../assets/planet1.png" alt="planet1" />
       <img class="planet2" src="../../assets/planet2.png" alt="planet2" />
@@ -108,6 +111,32 @@ export default {
   height: 100%;
   width: 100%;
 
+  @media (max-width: 599px) {
+    img {
+      display: none;
+    }
+    .bckg-layer2,
+    .bckg-layer3,
+    .bckg-layer4 {
+      display: none;
+    }
+  }
+
+  .bckg-layer2,
+  .bckg-layer3,
+  .bckg-layer4 {
+    position: fixed;
+    left: 0;
+    top: 0;
+    resize: both;
+    width: 100%;
+    height: 100%;
+  }
+
+  .bckg-layer3,
+  .bckg-layer4 {
+    z-index: 3;
+  }
   .container {
     position: absolute;
     left: 0;
@@ -146,57 +175,50 @@ export default {
       z-index: 2;
     }
 
-    @media (max-width: 599px) {
-      img {
-        display: none;
-      }
-    }
-
     img {
       position: absolute;
       filter: drop-shadow(4px 7px 4px rgba(0, 0, 0, 0.486));
     }
 
     .planet1 {
-      max-height: 180px;
+      max-height: 130px;
       left: 5%;
       top: 10%;
     }
 
     .planet2 {
-      max-height: 300px;
+      max-height: 200px;
       right: 15%;
       bottom: 18%;
     }
 
     .planet3 {
-      max-height: 70px;
-      right: 10%;
-      bottom: 10%;
-      filter: blur(0.5px);
+      max-height: 60px;
+      right: 27%;
+      top: 22%;
     }
 
     .planet4 {
-      max-height: 120px;
+      max-height: 90px;
       left: 15%;
-      bottom: 9%;
+      bottom: 25%;
     }
 
     .planet5 {
-      max-height: 160px;
-      right: 1%;
+      max-height: 120px;
+      right: 12%;
       top: 4%;
     }
 
     .planet6 {
-      max-height: 60px;
-      right: 20%;
-      top: 25%;
+      max-height: 35px;
+      left: 29%;
+      top: 5%;
       transform: rotate(90deg);
+      filter: blur(0.5px);
       filter: opacity(0.7) drop-shadow(0 0 0 green)
         drop-shadow(3px -1px 2px rgba(0, 0, 0, 0.486)) blur(0.5px);
     }
-
   }
 }
 </style>
