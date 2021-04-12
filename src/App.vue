@@ -49,4 +49,9 @@ export default {
   src: local("Cocogoose"),
     url("./assets/font/cocogoose/Cocogoose Pro-trial.ttf") format("truetype");
 }
+@font-face {
+  font-family: "Cocogoose-light";
+  src: local("Cocogoose-light"),
+    url("./assets/font/cocogoose/Cocogoose Pro Light-trial.ttf") format("truetype");
+}
 </style>

@@ -7,7 +7,11 @@
       :key="index"
       :class="`sortedSkills sortedSkills--${index}`"
     >
-      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+      <svg
+        viewBox="0 0 400 400"
+        xmlns="http://www.w3.org/2000/svg"
+        class="line"
+      >
         <polygon
           :id="`line-skill__${index}`"
           fill="none"
@@ -80,7 +84,7 @@ export default {
           {
             name: "NodeJS",
             imageSrc: require("../../assets/skills-logo/nodeJS.png"),
-            skillRate: "3",
+            skillRate: "2",
             skillHovered: false,
             category: "back",
           },
@@ -144,8 +148,8 @@ export default {
       skills.forEach((typesSkill) => {
         let line = "";
         for (let i = 0; i < typesSkill.length; i++) {
-          let a = $(typesSkill[i]).position().left + 3;
-          let b = $(typesSkill[i]).position().top + 3;
+          let a = $(typesSkill[i]).position().left + 40;
+          let b = $(typesSkill[i]).position().top + 40;
           line += a + "," + b + " ";
         }
 
@@ -180,8 +184,8 @@ export default {
   }
 
   .sortedSkills {
-    width: 400px;
-    height: 400px;
+    width: 30%;
+    height: auto;
     position: absolute;
     z-index: 2;
 
@@ -239,10 +243,13 @@ export default {
       }
     }
 
+    .line {
+      stroke-width: 2;
+    }
     .skill {
       position: absolute;
-      height: 80px;
-      width: 80px;
+      max-height: 80px;
+      max-width: 80px;
 
       .images {
         display: flex;

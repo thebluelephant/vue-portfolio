@@ -1,6 +1,6 @@
 <template>
   <div class="skillRating">
-    <p v-if="skillHovered">{{ skill.name }}</p>
+    <p>{{ skill.name }}</p>
     <div class="stars-rating">
       <svg
         v-for="(element, index) in maxRate"
@@ -86,6 +86,7 @@ export default {
   p {
     color: white;
     font-size: 70%;
+    font-family: "Cocogoose-light";
     margin: 0 0 5px 0;
   }
 

@@ -6,11 +6,8 @@
       <p>
         My name is Léa <br />
         I'm a french developer and webdesigner based in Lyon <br />
-        Beside my work, I love writing, sewing, and lost my socks during laundry
-      </p>
-      <p>
-        Initialement graphiste, j'ai évolué dans le monde du digital en poussant
-        encore d'avantage ma pratique vers le développement web
+        Initially focused on the world of image and graphics, I evolved in the
+        digital world by further pushing my practice towards web development
       </p>
     </div>
   </div>
@@ -39,8 +36,7 @@ export default {
         ".astronaute",
         {
           x: 200,
-          y: 1000,
-          delay: 30,
+          y: 800,
           ease: "none",
         },
         {
