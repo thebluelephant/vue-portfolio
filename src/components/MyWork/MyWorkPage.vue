@@ -131,6 +131,8 @@ export default {
       frontSkills: null,
       backSkills: null,
       randomSkills: null,
+      tm: null,
+      tl: null,
     };
   },
   mounted() {
@@ -140,7 +142,10 @@ export default {
     this.randomSkills = document.getElementsByClassName("skill__random");
     this.drawConstellation();
   },
-
+  beforeDestroy() {
+    this.tm.kill();
+    this.tl.kill();
+  },
   methods: {
     drawConstellation() {
       const skills = [this.frontSkills, this.backSkills, this.randomSkills];
@@ -152,15 +157,14 @@ export default {
           let b = $(typesSkill[i]).position().top + 40;
           line += a + "," + b + " ";
         }
-
-        TweenMax.set(`#line-${typesSkill[0].classList[1]}`, {
+        this.tm = TweenMax.set(`#line-${typesSkill[0].classList[1]}`, {
           attr: { points: line },
         });
       });
     },
 
     makeLogoFloat() {
-      gsap.timeline().to(".skill", {
+      this.tl = gsap.timeline().to(".skill", {
         x: "random(-50, 50)",
         y: "random(-50, 50)",
         duration: 10,
@@ -184,7 +188,7 @@ export default {
   }
 
   .sortedSkills {
-    width: 30%;
+    width: 400px;
     height: auto;
     position: absolute;
     z-index: 2;
