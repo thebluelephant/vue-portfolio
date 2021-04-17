@@ -8,7 +8,7 @@
       :class="`sortedSkills sortedSkills--${index}`"
     >
       <svg
-        viewBox="0 0 400 400"
+        viewBox="0 0 450 450"
         xmlns="http://www.w3.org/2000/svg"
         class="line"
       >
@@ -57,6 +57,29 @@ export default {
   data() {
     return {
       skills: {
+        random: [
+          {
+            name: "Photoshop",
+            imageSrc: require("../../assets/skills-logo/photoShop.png"),
+            skillRate: "4",
+            skillHovered: false,
+            category: "random",
+          },
+          {
+            name: "Indesign",
+            imageSrc: require("../../assets/skills-logo/inDesign.png"),
+            skillRate: "3",
+            skillHovered: false,
+            category: "random",
+          },
+          {
+            name: "Github",
+            imageSrc: require("../../assets/skills-logo/gitHub.png"),
+            skillRate: "3",
+            skillHovered: false,
+            category: "random",
+          },
+        ],
         front: [
           {
             name: "Angular",
@@ -103,37 +126,15 @@ export default {
             category: "back",
           },
         ],
-        random: [
-          {
-            name: "Photoshop",
-            imageSrc: require("../../assets/skills-logo/photoShop.png"),
-            skillRate: "4",
-            skillHovered: false,
-            category: "random",
-          },
-          {
-            name: "Indesign",
-            imageSrc: require("../../assets/skills-logo/inDesign.png"),
-            skillRate: "3",
-            skillHovered: false,
-            category: "random",
-          },
-          {
-            name: "Github",
-            imageSrc: require("../../assets/skills-logo/gitHub.png"),
-            skillRate: "3",
-            skillHovered: false,
-            category: "random",
-          },
-        ],
       },
 
       frontSkills: null,
       backSkills: null,
       randomSkills: null,
-      tm: null,
-      tl: null,
     };
+  },
+  created() {
+    window.addEventListener("resize", this.makeLogoFloat);
   },
   mounted() {
     this.makeLogoFloat();
@@ -145,6 +146,7 @@ export default {
   beforeDestroy() {
     this.tm.kill();
     this.tl.kill();
+    window.removeEventListener("resize", this.makeLogoFloat);
   },
   methods: {
     drawConstellation() {
@@ -152,9 +154,11 @@ export default {
 
       skills.forEach((typesSkill) => {
         let line = "";
+        let leftIconPosition = typesSkill === this.frontSkills ? 25 : 120;
+        let topIconPosition = typesSkill === this.frontSkills ? 25 : 70;
         for (let i = 0; i < typesSkill.length; i++) {
-          let a = $(typesSkill[i]).position().left + 40;
-          let b = $(typesSkill[i]).position().top + 40;
+          let a = $(typesSkill[i]).position().left + leftIconPosition;
+          let b = $(typesSkill[i]).position().top + topIconPosition;
           line += a + "," + b + " ";
         }
         this.tm = TweenMax.set(`#line-${typesSkill[0].classList[1]}`, {
@@ -164,9 +168,12 @@ export default {
     },
 
     makeLogoFloat() {
+      const isPhoneScreen = window.innerWidth < 420;
+      const floatingSpace = isPhoneScreen ? 30 : 50;
+      console.log(floatingSpace);
       this.tl = gsap.timeline().to(".skill", {
-        x: "random(-50, 50)",
-        y: "random(-50, 50)",
+        x: `random(-${floatingSpace}, ${floatingSpace})`,
+        y: `random(-${floatingSpace}, ${floatingSpace})`,
         duration: 10,
         repeat: -1,
         repeatRefresh: true,
@@ -188,14 +195,19 @@ export default {
   }
 
   .sortedSkills {
-    width: 400px;
+    width: 450px;
     height: auto;
     position: absolute;
     z-index: 2;
 
     &--front {
-      left: 5%;
-      top: 20%;
+      right: 35%;
+      bottom: 15%;
+
+      img {
+        height: 60px;
+        width: 60px;
+      }
 
       #img-Angular {
         right: 50px;
@@ -212,8 +224,13 @@ export default {
     }
 
     &--back {
+      width: 350px;
       right: 5%;
       top: 20%;
+
+      @media (min-width: 1700px) {
+        width: 450px;
+      }
 
       #img-NodeJS {
         right: 50px;
@@ -230,8 +247,13 @@ export default {
     }
 
     &--random {
-      right: 35%;
-      bottom: 0;
+      width: 350px;
+      left: 5%;
+      top: 20%;
+
+      @media (min-width: 1700px) {
+        width: 450px;
+      }
 
       #img-Indesign {
         left: 50px;
@@ -258,20 +280,15 @@ export default {
       .images {
         display: flex;
         justify-content: center;
-        height: 60px;
-        width: 60px;
+        height: 45px;
+        width: 45px;
+        cursor: pointer;
+        z-index: 2;
 
         .rating {
           position: absolute;
           top: -35px;
           z-index: 1;
-        }
-
-        img {
-          max-height: 60px;
-          max-width: 60px;
-          cursor: pointer;
-          z-index: 2;
         }
 
         #VueJS,

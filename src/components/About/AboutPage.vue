@@ -11,7 +11,7 @@
         development.
       </p>
       <div class="contact">
-        <p>Let's talk ! </p>
+        <p>Let's talk !</p>
         <a href="https://www.linkedin.com/in/lea-delacotte-developpeur">
           <img class="contact__icon" src="../../assets/linkedIn.png" alt="" />
         </a>
@@ -29,8 +29,13 @@ export default {
   components: {
     StarSky,
   },
+
   mounted() {
     this.astronautCrossing();
+  },
+  beforeDestroy() {
+    TweenMax.killTweensOf("*");
+    gsap.killTweensOf("*");
   },
   methods: {
     astronautCrossing() {
