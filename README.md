@@ -1,7 +1,5 @@
 # vue-portfolio
 
-permalink: /index.html
-
 ## Project setup
 ```
 npm install
