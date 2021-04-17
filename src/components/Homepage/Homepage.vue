@@ -37,6 +37,10 @@ export default {
     this.asteroidMove();
     this.planetMove();
   },
+  beforeDestroy() {
+    TweenMax.killTweensOf("*");
+    gsap.killTweensOf("*");
+  },
   methods: {
     planetMove() {
       TweenMax.to(".planet1", 65, {

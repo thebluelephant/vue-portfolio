@@ -3,12 +3,19 @@
     <StarSky />
     <img class="astronaute" src="../../assets/atronot1.png" alt="astronaute" />
     <div class="aboutText">
-      <p>
+      <p class="introduction">
         My name is Léa <br />
-        I'm a french developer and webdesigner based in Lyon <br />
-        Initially focused on the world of image and graphics, I evolved in the
-        digital world by further pushing my practice towards web development
+        I'm a french developer and webdesigner based in Lyon. <br />
+        Initially focused on the environment of image and graphics, I evolved in
+        the digital world by further pushing my practice towards web
+        development.
       </p>
+      <div class="contact">
+        <p>Let's talk !</p>
+        <a href="https://www.linkedin.com/in/lea-delacotte-developpeur">
+          <img class="contact__icon" src="../../assets/linkedIn.png" alt="" />
+        </a>
+      </div>
     </div>
   </div>
 </template>
@@ -22,8 +29,13 @@ export default {
   components: {
     StarSky,
   },
+
   mounted() {
     this.astronautCrossing();
+  },
+  beforeDestroy() {
+    TweenMax.killTweensOf("*");
+    gsap.killTweensOf("*");
   },
   methods: {
     astronautCrossing() {
@@ -35,12 +47,12 @@ export default {
       gsap.timeline().fromTo(
         ".astronaute",
         {
-          x: 200,
+          x: 150,
           y: 800,
           ease: "none",
         },
         {
-          x: 200,
+          x: 150,
           y: -1000,
           duration: 30,
           ease: "none",
@@ -68,19 +80,34 @@ export default {
   }
 
   .aboutText {
+    position: absolute;
+    right: 0;
     height: 100%;
-    width: 100%;
+    width: 60%;
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 
     p {
-      width: 40%;
       font-size: 2.5vw;
       color: #87ebda;
-      padding-right: 10%;
       z-index: 3;
       filter: drop-shadow(2px 4px 2px rgba(0, 0, 0, 0.486));
+      padding-right: 10%;
+    }
+
+    .contact {
+      display: flex;
+      align-items: center;
+
+      p {
+        padding-right: 25px;
+      }
+
+      &__icon {
+        max-height: 50px;
+        max-width: 50px;
+      }
     }
   }
 }

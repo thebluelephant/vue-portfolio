@@ -1,9 +1,10 @@
 <template>
   <div id="app">
-
     <Navbar class="navbar" />
     <div class="body">
-      <router-view></router-view>
+      <transition name="fade">
+        <router-view></router-view>
+      </transition>
     </div>
   </div>
 </template>
@@ -44,6 +45,13 @@ export default {
   grid-column: 2;
   grid-row: 2;
 }
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
 @font-face {
   font-family: "Cocogoose";
   src: local("Cocogoose"),
@@ -52,6 +60,7 @@ export default {
 @font-face {
   font-family: "Cocogoose-light";
   src: local("Cocogoose-light"),
-    url("./assets/font/cocogoose/Cocogoose Pro Light-trial.ttf") format("truetype");
+    url("./assets/font/cocogoose/Cocogoose Pro Light-trial.ttf")
+      format("truetype");
 }
 </style>
