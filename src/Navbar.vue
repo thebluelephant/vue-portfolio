@@ -17,7 +17,7 @@
         </router-link>
       </ul>
       <ul>
-        <router-link to="/mywork"><p>My work</p></router-link>
+        <router-link to="/skills"><p>Skills</p></router-link>
       </ul>
     </li>
   </div>

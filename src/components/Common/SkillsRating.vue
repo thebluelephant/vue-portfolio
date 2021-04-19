@@ -23,7 +23,7 @@ import gsap from "gsap";
 
 export default {
   name: "skillsRating",
-  props: ["skill", "skillHovered"],
+  props: ["skill", "skillHovered", "mobileDevice"],
   data() {
     return {
       maxRate: 5,
@@ -37,7 +37,9 @@ export default {
         : this.disparition();
     },
   },
-
+  mounted() {
+    this.mobileDevice ? this.bouncingApparition(this.skill.name) : "";
+  },
   methods: {
     bouncingApparition(skillName) {
       for (let i = 1; i <= this.maxRate; i++) {
@@ -82,6 +84,10 @@ export default {
   flex-direction: column;
   width: 100px;
   height: 50px;
+
+  @media (max-width: 400px) {
+    height: 40px;
+  }
 
   p {
     color: white;

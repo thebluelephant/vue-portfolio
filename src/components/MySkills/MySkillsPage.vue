@@ -1,6 +1,6 @@
 
 <template>
-  <div class="myWork" v-if="skills">
+  <div class="mySkills" v-if="skills">
     <StarSky class="starSky" />
     <div
       v-for="(sortedSkills, index) in skills"
@@ -39,6 +39,36 @@
         </div>
       </div>
     </div>
+    <div v-if="mobileDevice" class="sortedSkills--responsive">
+      <div
+        v-for="(sortedSkills, index) in skills"
+        :key="index"
+        :class="`responsiveSkill--${index}`"
+      >
+        <p class="category-name">{{ sortedSkills[0].category }} skills</p>
+        <div class="grouped-skills">
+          <div
+            v-for="skill in sortedSkills"
+            :key="skill.name"
+            :id="`img-${skill.name}`"
+            :class="`skill skill__${skill.category}`"
+            @mouseenter="skill.skillHovered = true"
+            @mouseleave="skill.skillHovered = false"
+          >
+            <div class="images">
+              <SkillsRating
+                class="rating"
+                :skill="skill"
+                :mobileDevice="mobileDevice"
+                :skillHovered="skill.skillHovered"
+                :id="`rating-${skill.name}`"
+              />
+              <img :src="skill.imageSrc" :id="`img-${skill.name}`" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -49,7 +79,7 @@ import SkillsRating from "../Common/SkillsRating";
 import $ from "jquery";
 
 export default {
-  name: "MyWorkPage",
+  name: "mySkillsPage",
   components: {
     StarSky,
     SkillsRating,
@@ -57,27 +87,27 @@ export default {
   data() {
     return {
       skills: {
-        random: [
+        soft: [
           {
             name: "Photoshop",
             imageSrc: require("../../assets/skills-logo/photoShop.png"),
             skillRate: "4",
             skillHovered: false,
-            category: "random",
+            category: "soft",
           },
           {
             name: "Indesign",
             imageSrc: require("../../assets/skills-logo/inDesign.png"),
             skillRate: "3",
             skillHovered: false,
-            category: "random",
+            category: "soft",
           },
           {
             name: "Github",
             imageSrc: require("../../assets/skills-logo/gitHub.png"),
             skillRate: "3",
             skillHovered: false,
-            category: "random",
+            category: "soft",
           },
         ],
         front: [
@@ -130,28 +160,31 @@ export default {
 
       frontSkills: null,
       backSkills: null,
-      randomSkills: null,
+      softSkills: null,
+      mobileDevice: false,
     };
   },
   created() {
-    window.addEventListener("resize", this.makeLogoFloat);
+    this.mobileDevice = window.innerWidth <= 400;
   },
   mounted() {
-    this.makeLogoFloat();
-    this.frontSkills = document.getElementsByClassName("skill__front");
-    this.backSkills = document.getElementsByClassName("skill__back");
-    this.randomSkills = document.getElementsByClassName("skill__random");
-    this.drawConstellation();
+    if (!this.mobileDevice) {
+      this.makeLogoFloat();
+      this.frontSkills = document.getElementsByClassName("skill__front");
+      this.backSkills = document.getElementsByClassName("skill__back");
+      this.softSkills = document.getElementsByClassName("skill__soft");
+      this.drawConstellation();
+    }
   },
   beforeDestroy() {
-    this.tm.kill();
-    this.tl.kill();
-    window.removeEventListener("resize", this.makeLogoFloat);
+    if (!this.mobileDevice) {
+      this.tm.kill();
+      this.tl.kill();
+    }
   },
   methods: {
     drawConstellation() {
-      const skills = [this.frontSkills, this.backSkills, this.randomSkills];
-
+      const skills = [this.frontSkills, this.backSkills, this.softSkills];
       skills.forEach((typesSkill) => {
         let line = "";
         let leftIconPosition = typesSkill === this.frontSkills ? 25 : 120;
@@ -161,6 +194,7 @@ export default {
           let b = $(typesSkill[i]).position().top + topIconPosition;
           line += a + "," + b + " ";
         }
+        console.log(line);
         this.tm = TweenMax.set(`#line-${typesSkill[0].classList[1]}`, {
           attr: { points: line },
         });
@@ -168,12 +202,9 @@ export default {
     },
 
     makeLogoFloat() {
-      const isPhoneScreen = window.innerWidth < 420;
-      const floatingSpace = isPhoneScreen ? 30 : 50;
-      console.log(floatingSpace);
       this.tl = gsap.timeline().to(".skill", {
-        x: `random(-${floatingSpace}, ${floatingSpace})`,
-        y: `random(-${floatingSpace}, ${floatingSpace})`,
+        x: `random(-50, 50)`,
+        y: `random(-50, 50)`,
         duration: 10,
         repeat: -1,
         repeatRefresh: true,
@@ -185,9 +216,10 @@ export default {
 </script>
 
 <style  lang="scss" scoped>
-.myWork {
+.mySkills {
   height: 100%;
   width: 100%;
+  position: relative;
 
   .starSky {
     z-index: 1;
@@ -199,6 +231,10 @@ export default {
     height: auto;
     position: absolute;
     z-index: 2;
+
+    @media (max-width: 400px) {
+      display: none;
+    }
 
     &--front {
       right: 35%;
@@ -246,7 +282,7 @@ export default {
       }
     }
 
-    &--random {
+    &--soft {
       width: 350px;
       left: 5%;
       top: 20%;
@@ -295,6 +331,63 @@ export default {
         #Photoshop,
         #Indesign {
           max-height: 65px;
+        }
+      }
+    }
+
+    &--responsive {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      top: 10%;
+
+      @media (min-width: 400px) {
+        display: none;
+      }
+
+      .responsiveSkill {
+        &--soft,
+        &--front,
+        &--back {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          position: relative;
+          height: 110px;
+          margin-bottom: 15px;
+
+          .category-name {
+            position: absolute;
+            text-transform: capitalize;
+            text-align: unset;
+            font-size: 15px;
+            width: 100%;
+            left: 0;
+            top: 0;
+          }
+          .grouped-skills {
+            width: 100%;
+            justify-content: space-around;
+            display: flex;
+            position: absolute;
+            top: 40%;
+          }
+          img {
+            height: 30px;
+            width: 30px;
+          }
+
+          .images {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
+          .skill {
+            max-height: 60px;
+            max-width: 60px;
+          }
         }
       }
     }
