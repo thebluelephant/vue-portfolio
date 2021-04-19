@@ -1,14 +1,14 @@
 <template>
   <div class="aboutPage">
-    <StarSky />
+    <StarSky class="starSky" />
     <img class="astronaute" src="../../assets/atronot1.png" alt="astronaute" />
     <div class="aboutText">
       <p class="introduction">
         My name is Léa <br />
         I'm a french developer and webdesigner based in Lyon. <br />
         Initially focused on the environment of image and graphics, I evolved in
-        the digital world by further pushing my practice towards web
-        development.
+        the digital world by further pushing my practice three years ago towards
+        web development.
       </p>
       <div class="contact">
         <p>Let's talk !</p>
@@ -73,6 +73,12 @@ export default {
   grid-row: 2;
   grid-column: 2;
 
+  .starSky {
+    @media (max-width: 400px) {
+      opacity: 0.3;
+    }
+  }
+  
   .astronaute {
     position: absolute;
     max-height: 400px;
@@ -88,12 +94,20 @@ export default {
     justify-content: center;
     flex-direction: column;
 
+    @media (max-width: 400px) {
+      width: 90%;
+    }
+
     p {
       font-size: 2.5vw;
       color: #87ebda;
       z-index: 3;
       filter: drop-shadow(2px 4px 2px rgba(0, 0, 0, 0.486));
       padding-right: 10%;
+
+      @media (max-width: 400px) {
+        font-size: 4vw;
+      }
     }
 
     .contact {

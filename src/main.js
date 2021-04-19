@@ -2,7 +2,7 @@ import Vue from 'vue';
 import App from './App';
 import AboutPage from './components/About/AboutPage';
 import HomePage from './components/Homepage/Homepage';
-import MyWorkPage from './components/MyWork/MyWorkPage';
+import MySkillsPage from './components/MySkills/MySkillsPage';
 import VueRouter from 'vue-router';
 
 
@@ -22,8 +22,8 @@ const routes = [
         component: AboutPage
       },
       {
-        path: 'mywork',
-        component: MyWorkPage
+        path: 'skills',
+        component: MySkillsPage
       },
       {
         path: 'home',
