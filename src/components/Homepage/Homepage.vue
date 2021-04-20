@@ -1,8 +1,26 @@
 <template>
   <div class="home">
-    <img src="../../assets/bckg-layer2.png" alt="" class="bckg-layer2" />
-    <img src="../../assets/bckg-layer3.png" alt="" class="bckg-layer3" />
-    <img src="../../assets/bckg-layer4.png" alt="" class="bckg-layer4" />
+    <div id="home-parallax">
+      <img
+        data-depth="0.3"
+        src="../../assets/bckg-layer2.png"
+        alt=""
+        class="bckg-layer2"
+      />
+      <img
+        data-depth="0.2"
+        src="../../assets/bckg-layer3.png"
+        alt=""
+        class="bckg-layer3"
+      />
+      <img
+        data-depth="0.1"
+        src="../../assets/bckg-layer4.png"
+        alt=""
+        class="bckg-layer4"
+      />
+    </div>
+
     <div class="container">
       <StarSky class="starSky" />
       <AsteroidCrossing />
@@ -12,7 +30,12 @@
         <p>I'm a webdeveloper and a webdesigner</p>
         <p>Welcome in my universe !</p>
       </div>
-      <img class="planet1" src="../../assets/planet1.png" alt="planet1" />
+      <img
+        data-depth="0.3"
+        class="planet1"
+        src="../../assets/planet1.png"
+        alt="planet1"
+      />
       <img class="planet2" src="../../assets/planet2.png" alt="planet2" />
       <img class="planet3" src="../../assets/planet3.png" alt="planet3" />
       <img class="planet4" src="../../assets/planet4.png" alt="planet4" />
@@ -26,6 +49,7 @@
 import StarSky from "../Common/StarSky";
 import AsteroidCrossing from "./AsteroidCrossing";
 import gsap, { TweenMax } from "gsap";
+import Parallax from "parallax-js";
 
 export default {
   name: "HomePage",
@@ -36,6 +60,9 @@ export default {
   mounted() {
     this.asteroidMove();
     this.planetMove();
+    let homeParallax = document.getElementById("home-parallax");
+    new Parallax(homeParallax);
+    console.log();
   },
   beforeDestroy() {
     TweenMax.killTweensOf("*");
@@ -114,6 +141,8 @@ export default {
   position: fixed;
   height: 100%;
   width: 100%;
+  top: 0;
+  left: 0;
 
   @media (max-width: 599px) {
     img {
@@ -121,7 +150,8 @@ export default {
     }
     .bckg-layer2,
     .bckg-layer3,
-    .bckg-layer4 {
+    .bckg-layer4,
+    #home-parallax {
       display: none;
     }
   }
@@ -130,11 +160,15 @@ export default {
   .bckg-layer3,
   .bckg-layer4 {
     position: fixed;
-    left: 0;
-    top: 0;
     resize: both;
-    width: 100%;
-    height: 100%;
+    width: 105%;
+    height: 105%;
+  }
+  #home-parallax {
+    height: 102%;
+    width: 102%;
+    left: -5%;
+    top: -5%;
   }
 
   .bckg-layer3,

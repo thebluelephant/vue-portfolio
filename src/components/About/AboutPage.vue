@@ -1,6 +1,13 @@
 <template>
   <div class="aboutPage">
     <StarSky class="starSky" />
+    <div id="about-parallax">
+      <img
+        data-depth="0.6"
+        src="../../assets/station.png"
+        alt="station spatiale"
+      />
+    </div>
     <img class="astronaute" src="../../assets/atronot1.png" alt="astronaute" />
     <div class="aboutText">
       <p class="introduction">
@@ -23,6 +30,7 @@
 <script>
 import StarSky from "../Common/StarSky";
 import gsap, { TweenMax } from "gsap";
+import Parallax from "parallax-js";
 
 export default {
   name: "AboutPage",
@@ -32,6 +40,8 @@ export default {
 
   mounted() {
     this.astronautCrossing();
+    let aboutParallax = document.getElementById("about-parallax");
+    new Parallax(aboutParallax);
   },
   beforeDestroy() {
     TweenMax.killTweensOf("*");
@@ -78,13 +88,25 @@ export default {
       opacity: 0.3;
     }
   }
-  
+
   .astronaute {
     position: absolute;
     max-height: 400px;
     transform: rotate(40deg);
   }
 
+  #about-parallax {
+    left: 5%;
+    position: absolute;
+    top: 10%;
+    height: 25%;
+    width: 25%;
+
+    img {
+      max-height: 100px;
+      max-width: 100px;
+    }
+  }
   .aboutText {
     position: absolute;
     right: 0;
