@@ -40,6 +40,10 @@ li {
   flex-direction: row;
   justify-content: space-around;
   font-family: "Cocogoose";
+
+  @-moz-document url-prefix() {
+    height: 100%;
+  }
 }
 ul {
   cursor: pointer;
@@ -50,6 +54,14 @@ ul {
   background-size: 100% 0.2em;
   background-position: 0 88%;
   transition: background-size 0.2s ease-in;
+
+  //Firefox
+  @-moz-document url-prefix() {
+    display : flex;
+    justify-content : center;
+    width : 90px;
+    height : 25px
+  }
 
   p {
     margin: 0;
