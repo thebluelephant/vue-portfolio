@@ -35,7 +35,7 @@ const routes = [
 ]
 const router = new VueRouter({
   routes, // raccourci pour `routes: routes`
-  mode: 'history',
+  mode: 'hash',
 })
 
 new Vue({
