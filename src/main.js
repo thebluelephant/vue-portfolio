@@ -7,8 +7,9 @@ import VueRouter from 'vue-router';
 
 
 Vue.use(VueRouter)
-Vue.config.productionTip = false
-export const bus = new Vue();
+Vue.config.productionTip = false;
+const EventBus = new Vue();
+export default EventBus;
 
 const routes = [
   { path: '*', redirect: '/home' },
