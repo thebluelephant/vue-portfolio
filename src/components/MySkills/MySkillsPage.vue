@@ -185,17 +185,18 @@ export default {
   methods: {
     drawConstellation() {
       const skills = [this.frontSkills, this.backSkills, this.softSkills];
-      skills.forEach((typesSkill) => {
+      skills.forEach((skill) => {
         let line = "";
-        let leftIconPosition = typesSkill === this.frontSkills ? 25 : 120;
-        let topIconPosition = typesSkill === this.frontSkills ? 25 : 70;
-        for (let i = 0; i < typesSkill.length; i++) {
-          let a = $(typesSkill[i]).position().left + leftIconPosition;
-          let b = $(typesSkill[i]).position().top + topIconPosition;
+        let iconPosFromLeft = skill === this.frontSkills ? 25 : 30;
+        let iconPosFromTop = skill === this.frontSkills ? 25 : 30;
+
+        for (let i = 0; i < skill.length; i++) {
+          let a = $(skill[i]).position().left + iconPosFromLeft;
+          let b = $(skill[i]).position().top + iconPosFromTop;
           line += a + "," + b + " ";
         }
-        console.log(line);
-        this.tm = TweenMax.set(`#line-${typesSkill[0].classList[1]}`, {
+        
+        this.tm = TweenMax.set(`#line-${skill[0].classList[1]}`, {
           attr: { points: line },
         });
       });
@@ -203,8 +204,8 @@ export default {
 
     makeLogoFloat() {
       this.tl = gsap.timeline().to(".skill", {
-        x: `random(-50, 50)`,
-        y: `random(-50, 50)`,
+        x: `random(-35, 35)`,
+        y: `random(-35, 35)`,
         duration: 10,
         repeat: -1,
         repeatRefresh: true,
@@ -269,16 +270,16 @@ export default {
       }
 
       #img-NodeJS {
-        right: 50px;
+        right: 90px;
         top: 50px;
       }
       #img-MongoDB {
-        left: 70px;
-        bottom: 30px;
+        left: 80px;
+        bottom: 100px;
       }
       #img-MySQL {
-        left: 90px;
-        top: 90px;
+        left: 100px;
+        top: 100px;
       }
     }
 
@@ -292,16 +293,16 @@ export default {
       }
 
       #img-Indesign {
-        left: 50px;
+        left: 30px;
         bottom: 100px;
       }
       #img-Photoshop {
         top: 30px;
-        right: 35px;
+        left: 35px;
       }
       #img-Github {
-        bottom: 80px;
-        right: 90px;
+        bottom: 90px;
+        right: 110px;
       }
     }
 

@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Loader v-if="displayLoader"/>
     <Navbar class="navbar" />
     <div class="body">
       <transition name="fade">
@@ -11,11 +12,24 @@
 
 <script>
 import Navbar from "./Navbar";
+import Loader from "./components/Common/Loader";
+import EventBus from "./main.js";
 
 export default {
   name: "App",
   components: {
     Navbar,
+    Loader,
+  },
+  data() {
+    return {
+      displayLoader: false,
+    };
+  },
+  created() {
+    EventBus.$on("displayLoader", (data) => {
+      this.displayLoader = data;
+    });
   },
 };
 </script>
@@ -41,6 +55,7 @@ export default {
   grid-row: 1;
   z-index: 4;
 }
+
 .body {
   grid-column: 2;
   grid-row: 2;
@@ -49,7 +64,8 @@ export default {
 .fade-leave-active {
   transition: opacity 0.5s;
 }
-.fade-enter, .fade-leave-to {
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
 }
 @font-face {
