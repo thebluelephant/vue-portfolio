@@ -66,7 +66,10 @@ export default {
     this.planetMove();
     let homeParallax = document.getElementById("home-parallax");
     new Parallax(homeParallax);
-    EventBus.$emit("displayLoader", false);
+
+    setTimeout(() => {
+      EventBus.$emit("displayLoader", false);
+    }, 1500);
   },
   beforeDestroy() {
     TweenMax.killTweensOf("*");
