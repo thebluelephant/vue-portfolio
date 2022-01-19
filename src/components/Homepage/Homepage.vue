@@ -50,7 +50,6 @@ import StarSky from "../Common/StarSky";
 import AsteroidCrossing from "./AsteroidCrossing";
 import gsap, { TweenMax } from "gsap";
 import Parallax from "parallax-js";
-import EventBus from "../../main";
 
 export default {
   name: "HomePage",
@@ -58,18 +57,11 @@ export default {
     StarSky,
     AsteroidCrossing,
   },
-  created() {
-    EventBus.$emit("displayLoader", true);
-  },
   mounted() {
     this.asteroidMove();
     this.planetMove();
     let homeParallax = document.getElementById("home-parallax");
     new Parallax(homeParallax);
-
-    setTimeout(() => {
-      EventBus.$emit("displayLoader", false);
-    }, 1500);
   },
   beforeDestroy() {
     TweenMax.killTweensOf("*");
