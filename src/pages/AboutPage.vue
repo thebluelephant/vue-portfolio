@@ -4,11 +4,11 @@
     <div id="about-parallax">
       <img
         data-depth="0.6"
-        src="../../assets/station.png"
+        src="../assets/station.png"
         alt="station spatiale"
       />
     </div>
-    <img class="astronaute" src="../../assets/atronot1.png" alt="astronaute" />
+    <img class="astronaute" src="../assets/atronot1.png" alt="astronaute" />
     <div class="aboutText">
       <p class="introduction">
         My name is Léa <br />
@@ -20,7 +20,7 @@
       <div class="contact">
         <p>Let's talk !</p>
         <a href="https://www.linkedin.com/in/lea-delacotte-developpeur">
-          <img class="contact__icon" src="../../assets/linkedIn.png" alt="" />
+          <img class="contact__icon" src="../assets/linkedIn.png" alt="" />
         </a>
       </div>
     </div>
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import StarSky from "../Common/StarSky";
+import StarSky from "../components/Shared/StarSky.vue";
 import gsap, { TweenMax } from "gsap";
 import Parallax from "parallax-js";
 
@@ -127,7 +127,7 @@ export default {
       filter: drop-shadow(2px 4px 2px rgba(0, 0, 0, 0.486));
       padding-right: 10%;
 
-      @media (max-width: 400px) {
+      @media (max-width: 800px) {
         font-size: 4vw;
       }
     }

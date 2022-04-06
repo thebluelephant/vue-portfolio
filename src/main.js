@@ -1,8 +1,9 @@
 import Vue from "vue";
 import App from "./App";
-import AboutPage from "./components/About/AboutPage";
-import HomePage from "./components/Homepage/Homepage";
-import MySkillsPage from "./components/MySkills/MySkillsPage";
+import AboutPage from "./pages/AboutPage.vue";
+import HomePage from "./pages/Homepage.vue";
+import MySkillsPage from "./pages/MySkillsPage.vue";
+import ProjectsPage from "./pages/ProjectsPage.vue";
 import VueRouter from "vue-router";
 
 Vue.use(VueRouter);
@@ -26,6 +27,10 @@ const routes = [
       {
         path: "home",
         component: HomePage,
+      },
+      {
+        path: "projects",
+        component: ProjectsPage,
       },
     ],
   },
