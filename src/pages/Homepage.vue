@@ -3,19 +3,19 @@
     <div id="home-parallax">
       <img
         data-depth="0.3"
-        src="../../assets/bckg-layer2.png"
+        src="../assets/bckg-layer2.png"
         alt=""
         class="bckg-layer2"
       />
       <img
         data-depth="0.2"
-        src="../../assets/bckg-layer3.png"
+        src="../assets/bckg-layer3.png"
         alt=""
         class="bckg-layer3"
       />
       <img
         data-depth="0.1"
-        src="../../assets/bckg-layer4.png"
+        src="../assets/bckg-layer4.png"
         alt=""
         class="bckg-layer4"
       />
@@ -33,21 +33,21 @@
       <img
         data-depth="0.3"
         class="planet1"
-        src="../../assets/planet1.png"
+        src="../assets/planet1.png"
         alt="planet1"
       />
-      <img class="planet2" src="../../assets/planet2.png" alt="planet2" />
-      <img class="planet3" src="../../assets/planet3.png" alt="planet3" />
-      <img class="planet4" src="../../assets/planet4.png" alt="planet4" />
-      <img class="planet5" src="../../assets/planet5.png" alt="planet5" />
-      <img class="planet6" src="../../assets/planet4.png" alt="planet6" />
+      <img class="planet2" src="../assets/planet2.png" alt="planet2" />
+      <img class="planet3" src="../assets/planet3.png" alt="planet3" />
+      <img class="planet4" src="../assets/planet4.png" alt="planet4" />
+      <img class="planet5" src="../assets/planet5.png" alt="planet5" />
+      <img class="planet6" src="../assets/planet4.png" alt="planet6" />
     </div>
   </div>
 </template>
 
 <script>
-import StarSky from "../Common/StarSky";
-import AsteroidCrossing from "./AsteroidCrossing";
+import StarSky from "../components/Shared/StarSky.vue";
+import AsteroidCrossing from "../components/Homepage/AsteroidCrossing.vue";
 import gsap, { TweenMax } from "gsap";
 import Parallax from "parallax-js";
 
@@ -135,7 +135,7 @@ export default {
 };
 </script>
 
-<style  lang="scss" scoped>
+<style lang="scss" scoped>
 .home {
   position: fixed;
   height: 100%;

@@ -1,4 +1,3 @@
-
 <template>
   <div class="mySkills" v-if="skills">
     <StarSky class="starSky" />
@@ -74,8 +73,8 @@
 
 <script>
 import gsap, { TweenMax } from "gsap";
-import StarSky from "../Common/StarSky";
-import SkillsRating from "../Common/SkillsRating";
+import StarSky from "../components/Shared/StarSky.vue";
+import SkillsRating from "../components/Shared/SkillsRating.vue";
 import $ from "jquery";
 
 export default {
@@ -90,21 +89,21 @@ export default {
         soft: [
           {
             name: "Photoshop",
-            imageSrc: require("../../assets/skills-logo/photoShop.png"),
+            imageSrc: require("../assets/skills-logo/photoShop.png"),
             skillRate: "4",
             skillHovered: false,
             category: "soft",
           },
           {
             name: "Indesign",
-            imageSrc: require("../../assets/skills-logo/inDesign.png"),
+            imageSrc: require("../assets/skills-logo/inDesign.png"),
             skillRate: "3",
             skillHovered: false,
             category: "soft",
           },
           {
             name: "Github",
-            imageSrc: require("../../assets/skills-logo/gitHub.png"),
+            imageSrc: require("../assets/skills-logo/gitHub.png"),
             skillRate: "3",
             skillHovered: false,
             category: "soft",
@@ -113,21 +112,21 @@ export default {
         front: [
           {
             name: "Angular",
-            imageSrc: require("../../assets/skills-logo/angular.png"),
+            imageSrc: require("../assets/skills-logo/angular.png"),
             skillRate: "4",
             skillHovered: false,
             category: "front",
           },
           {
             name: "React",
-            imageSrc: require("../../assets/skills-logo/reactJs.png"),
+            imageSrc: require("../assets/skills-logo/reactJs.png"),
             skillRate: "4",
             skillHovered: false,
             category: "front",
           },
           {
             name: "VueJS",
-            imageSrc: require("../../assets/skills-logo/vueJs.png"),
+            imageSrc: require("../assets/skills-logo/vueJs.png"),
             skillRate: "3",
             skillHovered: false,
             category: "front",
@@ -136,25 +135,25 @@ export default {
         back: [
           {
             name: "NodeJS",
-            imageSrc: require("../../assets/skills-logo/nodeJS.png"),
+            imageSrc: require("../assets/skills-logo/nodeJS.png"),
             skillRate: "2",
             skillHovered: false,
             category: "back",
           },
           {
             name: "MongoDB",
-            imageSrc: require("../../assets/skills-logo/mongoDb.png"),
+            imageSrc: require("../assets/skills-logo/mongoDb.png"),
             skillRate: "2",
             skillHovered: false,
             category: "back",
           },
           {
             name: "MySQL",
-            imageSrc: require("../../assets/skills-logo/mySql.png"),
+            imageSrc: require("../assets/skills-logo/mySql.png"),
             skillRate: "1",
             skillHovered: false,
             category: "back",
-          },
+          }
         ],
       },
 
@@ -195,7 +194,7 @@ export default {
           let b = $(skill[i]).position().top + iconPosFromTop;
           line += a + "," + b + " ";
         }
-        
+
         this.tm = TweenMax.set(`#line-${skill[0].classList[1]}`, {
           attr: { points: line },
         });
@@ -216,7 +215,7 @@ export default {
 };
 </script>
 
-<style  lang="scss" scoped>
+<style lang="scss" scoped>
 .mySkills {
   height: 100%;
   width: 100%;
